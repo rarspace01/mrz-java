@@ -146,4 +146,10 @@ public class MrzParserTest {
 		record = MrzParser.parse(unparseableDatesMrz);
 		Assert.assertEquals("BB0911", record.getDateOfBirth().toMrz());
 	}
+
+	@Test
+	public void testWithBrokenRZM() {
+
+	}
+
 }
