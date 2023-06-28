@@ -16,7 +16,14 @@ repositories {
 
 dependencies {
     implementation("org.slf4j:slf4j-api:1.7.36")
-    testImplementation("org.junit.vintage:junit-vintage-engine:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")
+    testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 group = "com.github.bordertech.mrz"

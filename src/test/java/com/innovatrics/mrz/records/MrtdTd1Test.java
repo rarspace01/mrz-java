@@ -25,8 +25,9 @@ import com.innovatrics.mrz.MrzParser;
 import com.innovatrics.mrz.types.MrzDate;
 import com.innovatrics.mrz.types.MrzDocumentCode;
 import com.innovatrics.mrz.types.MrzSex;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests {@link MrtdTd1}.
@@ -42,19 +43,19 @@ public class MrtdTd1Test {
 	@Test
 	public void testTd1Parsing() throws MrzParseException {
 		final MrtdTd1 r = (MrtdTd1) MrzParser.parse(PARSE);
-		Assert.assertEquals(MrzDocumentCode.TYPE_C, r.getCode());
-		Assert.assertEquals('C', r.getCode1());
-		Assert.assertEquals('I', r.getCode2());
-		Assert.assertEquals("UTO", r.getIssuingCountry());
-		Assert.assertEquals("UTO", r.getNationality());
-		Assert.assertEquals("D23145890", r.getDocumentNumber());
-		Assert.assertEquals("A123X5328434D23", r.getOptional());
-		Assert.assertEquals("", r.getOptional2());
-		Assert.assertEquals(new MrzDate(95, 7, 12), r.getExpirationDate());
-		Assert.assertEquals(new MrzDate(34, 7, 12), r.getDateOfBirth());
-		Assert.assertEquals(MrzSex.MALE, r.getSex());
-		Assert.assertEquals("STEVENSON", r.getSurname());
-		Assert.assertEquals("PETER", r.getGivenNames());
+		assertEquals(MrzDocumentCode.TYPE_C, r.getCode());
+		assertEquals('C', r.getCode1());
+		assertEquals('I', r.getCode2());
+		assertEquals("UTO", r.getIssuingCountry());
+		assertEquals("UTO", r.getNationality());
+		assertEquals("D23145890", r.getDocumentNumber());
+		assertEquals("A123X5328434D23", r.getOptional());
+		assertEquals("", r.getOptional2());
+		assertEquals(new MrzDate(95, 7, 12), r.getExpirationDate());
+		assertEquals(new MrzDate(34, 7, 12), r.getDateOfBirth());
+		assertEquals(MrzSex.MALE, r.getSex());
+		assertEquals("STEVENSON", r.getSurname());
+		assertEquals("PETER", r.getGivenNames());
 	}
 
 	@Test
@@ -72,17 +73,17 @@ public class MrtdTd1Test {
 		r.setSex(MrzSex.MALE);
 		r.setSurname("Stevenson");
 		r.setGivenNames("Peter");
-		Assert.assertEquals(TOMRZ, r.toMrz());
+		assertEquals(TOMRZ, r.toMrz());
 	}
 
 	@Test
 	public void testFindMrz() throws MrzNotFoundException, MrzParseException {
-		Assert.assertEquals("Did not find MRZ", PARSE.trim(), MrzFinderUtil.findMrz(PARSE));
+		assertEquals(PARSE.trim(), MrzFinderUtil.findMrz(PARSE), "Did not find MRZ");
 	}
 
 	@Test
 	public void testFindMrzWrapped() throws MrzNotFoundException, MrzParseException {
-		Assert.assertEquals("Did not find wrapped MRZ", PARSE.trim(), MrzFinderUtil.findMrz(WRAPPED));
+		assertEquals(PARSE.trim(), MrzFinderUtil.findMrz(WRAPPED), "Did not find wrapped MRZ");
 	}
 
 }

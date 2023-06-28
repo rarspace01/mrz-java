@@ -1,7 +1,8 @@
 package com.innovatrics.mrz
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 /**
  * Unit tests for [MrzFinderUtil].
@@ -10,73 +11,85 @@ class MrzFinderUtilTest {
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidMrz() {
-        Assert.assertEquals("Did not find valid MRZ", VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ))
+        assertEquals(VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ), "Did not find valid MRZ")
     }
 
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidMrzBlankStart() {
-        Assert.assertEquals("Did not find valid MRZ", VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ_BLANK_START))
+        assertEquals(VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ_BLANK_START), "Did not find valid MRZ")
     }
 
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidMrzBlankLines() {
-        Assert.assertEquals("Did not find valid MRZ", VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ_BLANK_LINES))
+        assertEquals(VALID_MRZ, MrzFinderUtil.findMrz(VALID_MRZ_BLANK_LINES), "Did not find valid MRZ")
     }
 
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidGerMrz() {
-        Assert.assertEquals("Did not find valid MRZ", VALID_GER_MRZ, MrzFinderUtil.findMrz(VALID_GER_MRZ))
+        assertEquals(VALID_GER_MRZ, MrzFinderUtil.findMrz(VALID_GER_MRZ), "Did not find valid MRZ")
     }
 
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidWrappedMrz() {
-        Assert.assertEquals("Did not find valid wrapped MRZ", VALID_MRZ, MrzFinderUtil.findMrz(WRAPPED_VALID))
+        assertEquals(VALID_MRZ, MrzFinderUtil.findMrz(WRAPPED_VALID), "Did not find valid wrapped MRZ")
     }
 
     @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testValidWrappedGerMrz() {
-        Assert.assertEquals("Did not find valid wrapped MRZ", VALID_GER_MRZ, MrzFinderUtil.findMrz(WRAPPED_VALID_GER_MRZ))
+        assertEquals(VALID_GER_MRZ, MrzFinderUtil.findMrz(WRAPPED_VALID_GER_MRZ), "Did not find valid wrapped MRZ")
     }
 
-    @Test(expected = MrzParseException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testInvalidMrz() {
-        MrzFinderUtil.findMrz(INVALID_MRZ)
+        assertThrows<MrzParseException> {
+            MrzFinderUtil.findMrz(INVALID_MRZ)
+        }
     }
 
-    @Test(expected = MrzParseException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testInvalidWrappedMrz() {
-        MrzFinderUtil.findMrz(WRAPPED_INVALID_MRZ)
+        assertThrows<MrzParseException> {
+            MrzFinderUtil.findMrz(WRAPPED_INVALID_MRZ)
+        }
     }
 
-    @Test(expected = MrzNotFoundException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testNotFoundMrz() {
-        MrzFinderUtil.findMrz(NO_MRZ)
+        assertThrows<MrzNotFoundException> {
+            MrzFinderUtil.findMrz(NO_MRZ)
+        }
     }
 
-    @Test(expected = MrzNotFoundException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testNotFoundGerMrz() {
-        MrzFinderUtil.findMrz(NO_GER_MRZ)
+        assertThrows<MrzNotFoundException> {
+            MrzFinderUtil.findMrz(NO_GER_MRZ)
+        }
     }
 
-    @Test(expected = MrzNotFoundException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testNullMrz() {
-        MrzFinderUtil.findMrz(null)
+        assertThrows<MrzNotFoundException> {
+            MrzFinderUtil.findMrz(null)
+        }
     }
 
-    @Test(expected = MrzNotFoundException::class)
+    @Test
     @Throws(MrzNotFoundException::class, MrzParseException::class)
     fun testEmptyMrz() {
-        MrzFinderUtil.findMrz("")
+        assertThrows<MrzNotFoundException> {
+            MrzFinderUtil.findMrz("")
+        }
     }
 
     companion object {
