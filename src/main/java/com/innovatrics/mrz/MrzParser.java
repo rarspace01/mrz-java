@@ -1,17 +1,17 @@
 /**
  * Java parser for the MRZ records, as specified by the ICAO organization.
  * Copyright (C) 2011 Innovatrics s.r.o.
- *
+ * <p>
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * <p>
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -44,21 +44,21 @@ public class MrzParser {
 	public static final char FILLER = '<';
 
 	static {
-		EXPAND_CHARACTERS.put("\u00C4", "AE"); // Ä
-		EXPAND_CHARACTERS.put("\u00E4", "AE"); // ä
-		EXPAND_CHARACTERS.put("\u00C5", "AA"); // Å
-		EXPAND_CHARACTERS.put("\u00E5", "AA"); // å
-		EXPAND_CHARACTERS.put("\u00C6", "AE"); // Æ
-		EXPAND_CHARACTERS.put("\u00E6", "AE"); // æ
-		EXPAND_CHARACTERS.put("\u0132", "IJ"); // Ĳ
-		EXPAND_CHARACTERS.put("\u0133", "IJ"); // ĳ
-		EXPAND_CHARACTERS.put("\u00D6", "OE"); // Ö
-		EXPAND_CHARACTERS.put("\u00F6", "OE"); // ö
-		EXPAND_CHARACTERS.put("\u00D8", "OE"); // Ø
-		EXPAND_CHARACTERS.put("\u00F8", "OE"); // ø
-		EXPAND_CHARACTERS.put("\u00DC", "UE"); // Ü
-		EXPAND_CHARACTERS.put("\u00FC", "UE"); // ü
-		EXPAND_CHARACTERS.put("\u00DF", "SS"); // ß
+		EXPAND_CHARACTERS.put("Ä", "AE"); // Ä
+		EXPAND_CHARACTERS.put("ä", "AE"); // ä
+		EXPAND_CHARACTERS.put("Å", "AA"); // Å
+		EXPAND_CHARACTERS.put("å", "AA"); // å
+		EXPAND_CHARACTERS.put("Æ", "AE"); // Æ
+		EXPAND_CHARACTERS.put("æ", "AE"); // æ
+		EXPAND_CHARACTERS.put("Ĳ", "IJ"); // Ĳ
+		EXPAND_CHARACTERS.put("ĳ", "IJ"); // ĳ
+		EXPAND_CHARACTERS.put("Ö", "OE"); // Ö
+		EXPAND_CHARACTERS.put("ö", "OE"); // ö
+		EXPAND_CHARACTERS.put("Ø", "OE"); // Ø
+		EXPAND_CHARACTERS.put("ø", "OE"); // ø
+		EXPAND_CHARACTERS.put("Ü", "UE"); // Ü
+		EXPAND_CHARACTERS.put("ü", "UE"); // ü
+		EXPAND_CHARACTERS.put("ß", "SS"); // ß
 	}
 
 	/**

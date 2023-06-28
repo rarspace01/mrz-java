@@ -1,17 +1,17 @@
 /**
  * Java parser for the MRZ records, as specified by the ICAO organization.
  * Copyright (C) 2011 Innovatrics s.r.o.
- *
+ * <p>
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * <p>
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -51,7 +51,7 @@ public enum MrzFormat {
 			if (!super.isFormatOf(mrzRows)) {
 				return false;
 			}
-			return mrzRows[0].substring(0, 5).equals("IDFRA");
+			return mrzRows[0].startsWith("IDFRA");
 		}
 	},
 	/**
@@ -65,7 +65,7 @@ public enum MrzFormat {
 			if (!super.isFormatOf(mrzRows)) {
 				return false;
 			}
-			return mrzRows[0].substring(0, 1).equals("V");
+			return mrzRows[0].charAt(0) == 'V';
 		}
 	},
 	/**
@@ -83,7 +83,7 @@ public enum MrzFormat {
 			if (!super.isFormatOf(mrzRows)) {
 				return false;
 			}
-			return mrzRows[0].substring(0, 1).equals("V");
+			return mrzRows[0].charAt(0) == 'V';
 		}
 	},
 	/**
@@ -143,7 +143,7 @@ public enum MrzFormat {
 	 * @return the format, never null.
 	 * @throws MrzParseException could not parse MRZ
 	 */
-	public static final MrzFormat get(final String mrz) throws MrzParseException {
+	public static MrzFormat get(final String mrz) throws MrzParseException {
 		final String[] rows = mrz.split("\n");
 		final int cols = rows[0].length();
 		for (int i = 1; i < rows.length; i++) {
