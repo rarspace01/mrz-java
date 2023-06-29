@@ -5,6 +5,9 @@ name: Java CI
 on:
   push:
 
+env:
+  AUTOPR: ${{ secrets.AUTOPR }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
