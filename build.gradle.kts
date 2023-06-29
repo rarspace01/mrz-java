@@ -44,17 +44,25 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.jar {
+    manifest {
+        archiveFileName.set("mrz-java.jar") // .jar name: name.jar
+    }
+}
+
 publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/rarspace01/mrz-java")
-                credentials {
-                    username = "rarspace01"
-                    password = System.getenv("AUTOPR")
-                }
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rarspace01/mrz-java")
+            credentials {
+                username = "rarspace01"
+                password = System.getenv("AUTOPR")
             }
         }
     }
