@@ -25,7 +25,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
-group = "com.github.bordertech.mrz"
+group = "rarspace01"
 version = "0.9-SNAPSHOT"
 description = "MRZ Java Parser"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
