@@ -4,6 +4,7 @@ name: Java CI
 # Note - the first pull_request from a forked repo will need to be given approval to run
 on:
   push:
+  workflow_dispatch:
 
 env:
   AUTOPR: ${{ secrets.AUTOPR }}
