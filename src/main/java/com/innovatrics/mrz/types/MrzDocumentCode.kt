@@ -1,106 +1,100 @@
 /**
  * Java parser for the MRZ records, as specified by the ICAO organization.
  * Copyright (C) 2011 Innovatrics s.r.o.
- * <p>
+ *
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * <p>
+ *
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * <p>
+ *
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package com.innovatrics.mrz.types;
+package com.innovatrics.mrz.types
 
-import com.innovatrics.mrz.MrzParseException;
-import com.innovatrics.mrz.MrzRange;
+import com.innovatrics.mrz.MrzParseException
+import com.innovatrics.mrz.MrzRange
 
 /**
  * Lists all supported MRZ record types (a.k.a. document codes).
  *
  * @author Martin Vysny
  */
-public enum MrzDocumentCode {
+enum class MrzDocumentCode {
+    /**
+     * A passport, P or IP. ... maybe Travel Document that is very similar to the passport.
+     */
+    PASSPORT,
 
-	/**
-	 * A passport, P or IP. ... maybe Travel Document that is very similar to the passport.
-	 */
-	PASSPORT,
-	/**
-	 * General I type (besides IP).
-	 */
-	TYPE_I,
-	/**
-	 * General A type (besides AC).
-	 */
-	TYPE_A,
-	/**
-	 * Crew member (AC).
-	 */
-	CREW_MEMBER,
-	/**
-	 * General type C.
-	 */
-	TYPE_C,
-	/**
-	 * Type V (Visa).
-	 */
-	TYPE_V,
-	/**
-	 *
-	 */
-	MIGRANT;
+    /**
+     * General I type (besides IP).
+     */
+    TYPE_I,
 
-	/**
-	 * @author Zsombor turning to switch statement due to lots of types
-	 *
-	 * @param mrz the mrz string
-	 * @return the mrz document code
-	 * @throws MrzParseException could not parse MRZ
-	 */
-	public static MrzDocumentCode parse(final String mrz) throws MrzParseException {
-		final String code = mrz.substring(0, 2);
+    /**
+     * General A type (besides AC).
+     */
+    TYPE_A,
 
-		// 2-letter checks
-		switch (code) {
-			case "IV":
-				throw new MrzParseException("IV document code is not allowed", mrz, new MrzRange(0, 2, 0), null); // TODO why?
-			case "AC":
-				return CREW_MEMBER;
-			case "ME":
-				return MIGRANT;
-			case "TD":
-				return MIGRANT; // travel document
-			case "IP":
-				return PASSPORT;
-			default:
-			// Do nothing
-		}
+    /**
+     * Crew member (AC).
+     */
+    CREW_MEMBER,
 
-		// 1-letter checks
-		switch (code.charAt(0)) {
-			case 'T':   // usually Travel Document
-			case 'P':
-				return PASSPORT;
-			case 'A':
-				return TYPE_A;
-			case 'C':
-				return TYPE_C;
-			case 'V':
-				return TYPE_V;
-			case 'I':
-				return TYPE_I; // identity card or residence permit
-			case 'R':
-				return MIGRANT;  // swedish '51 Convention Travel Document
-			default:
-				throw new MrzParseException("Unsupported document code: " + code, mrz, new MrzRange(0, 2, 0), null);
-		}
+    /**
+     * General type C.
+     */
+    TYPE_C,
 
-	}
+    /**
+     * Type V (Visa).
+     */
+    TYPE_V,
+
+    /**
+     *
+     */
+    MIGRANT;
+
+    companion object {
+        /**
+         * @author Zsombor turning to switch statement due to lots of types
+         *
+         * @param mrz the mrz string
+         * @return the mrz document code
+         * @throws MrzParseException could not parse MRZ
+         */
+        @JvmStatic
+		@Throws(MrzParseException::class)
+        fun parse(mrz: String): MrzDocumentCode? {
+            val code = mrz.substring(0, 2)
+            when (code) {
+                "IV" -> throw MrzParseException("IV document code is not allowed", mrz, MrzRange(0, 2, 0), null) // TODO why?
+                "AC" -> return CREW_MEMBER
+                "ME" -> return MIGRANT
+                "TD" -> return MIGRANT // travel document
+                "IP" -> return PASSPORT
+                else -> {}
+            }
+            return when (code[0]) {
+                'T', 'P' -> PASSPORT
+                'A' -> TYPE_A
+                'C' -> TYPE_C
+                'V' -> TYPE_V
+                'I' -> TYPE_I // identity card or residence permit
+                'R' -> MIGRANT // swedish '51 Convention Travel Document
+                else -> {println("Unsupported document code: $code $mrz"); null
+                }
+            }
+        }
+    }
 }

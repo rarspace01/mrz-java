@@ -68,7 +68,7 @@ public enum MrzSex {
 			case 'X':
 				return UNSPECIFIED;
 			default:
-				throw new IllegalArgumentException("Invalid MRZ sex character: " + sex);
+				return null;
 		}
 	}
 

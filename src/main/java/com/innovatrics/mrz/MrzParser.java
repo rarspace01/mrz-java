@@ -117,7 +117,7 @@ public class MrzParser {
 	 * @throws MrzParseException could not parse range
 	 */
 	public String[] parseName(final MrzRange range) throws MrzParseException {
-		checkValidCharacters(range);
+		hasValidCharacters(range);
 		String str = rawValue(range);
 		while (str.endsWith("<")) {
 			str = str.substring(0, str.length() - 1);
@@ -155,14 +155,16 @@ public class MrzParser {
 	 * @param range the range to check.
 	 * @throws MrzParseException could not parse range
 	 */
-	public void checkValidCharacters(final MrzRange range) throws MrzParseException {
+	public boolean hasValidCharacters(final MrzRange range) throws MrzParseException {
 		final String str = rawValue(range);
 		for (int i = 0; i < str.length(); i++) {
 			final char c = str.charAt(i);
 			if (c != FILLER && (c < '0' || c > '9') && (c < 'A' || c > 'Z')) {
-				throw new MrzParseException("Invalid character in MRZ record: " + c, getMrz(), new MrzRange(range.getColumn() + i, range.getColumn() + i + 1, range.getRow()), getFormat());
+				System.out.println("Invalid character in MRZ record: " + c + " " + getMrz());
+				return false;
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -173,7 +175,7 @@ public class MrzParser {
 	 * @throws MrzParseException could not parse range
 	 */
 	public String parseString(final MrzRange range) throws MrzParseException {
-		checkValidCharacters(range);
+		hasValidCharacters(range);
 		String str = rawValue(range);
 		while (str.endsWith("<")) {
 			str = str.substring(0, str.length() - 1);

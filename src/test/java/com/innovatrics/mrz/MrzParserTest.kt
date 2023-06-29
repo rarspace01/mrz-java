@@ -19,6 +19,7 @@
 package com.innovatrics.mrz
 
 import com.innovatrics.mrz.types.MrzDate
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
@@ -158,7 +159,10 @@ class MrzParserTest {
     @Test
     fun testWithBrokenRZM() {
         // Given
+        val mrzString = "IDROUSS1234567<891<<<<<<<<<<<<\n307037F3107276ROU<<<<<<<<<<<6<\nMANOLE<<CORINA<IOANA<<<<<<<<<<"
         // When
+        val record = MrzParser.parse(mrzString)
         // Then
+        assertThat(record).isNotNull
     }
 }
