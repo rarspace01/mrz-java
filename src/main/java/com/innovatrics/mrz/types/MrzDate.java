@@ -19,8 +19,6 @@
 package com.innovatrics.mrz.types;
 
 import java.io.Serializable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Holds a MRZ date type.
@@ -30,8 +28,6 @@ import org.slf4j.LoggerFactory;
 public class MrzDate implements Serializable, Comparable<MrzDate> {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOG = LoggerFactory.getLogger(MrzDate.class);
 
 	/**
 	 * Year, 00-99.
@@ -133,15 +129,15 @@ public class MrzDate implements Serializable, Comparable<MrzDate> {
 
 	private boolean check() {
 		if (getYear() < 0 || getYear() > 99) {
-			LOG.debug("Parameter year: invalid value " + getYear() + ": must be 0..99");
+			System.out.println("Parameter year: invalid value " + getYear() + ": must be 0..99");
 			return false;
 		}
 		if (getMonth() < 1 || getMonth() > 12) {
-			LOG.debug("Parameter month: invalid value " + getMonth() + ": must be 1..12");
+			System.out.println("Parameter month: invalid value " + getMonth() + ": must be 1..12");
 			return false;
 		}
 		if (getDay() < 1 || getDay() > 31) {
-			LOG.debug("Parameter day: invalid value " + getDay() + ": must be 1..31");
+			System.out.println("Parameter day: invalid value " + getDay() + ": must be 1..31");
 			return false;
 		}
 

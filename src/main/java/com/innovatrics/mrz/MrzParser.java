@@ -24,17 +24,12 @@ import com.innovatrics.mrz.types.MrzSex;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Parses the MRZ records.
  *
  * @author Martin Vysny
  */
 public class MrzParser {
-
-	private static final Logger LOG = LoggerFactory.getLogger(MrzParser.class);
 
 	private static final int[] MRZ_WEIGHTS = new int[]{7, 3, 1};
 	private static final Map<String, String> EXPAND_CHARACTERS = new HashMap<String, String>();
@@ -217,7 +212,7 @@ public class MrzParser {
 		}
 		if (digit != checkDigit) {
 			invalidCheckdigit = new MrzRange(col, col + 1, row);
-			LOG.info("Check digit verification failed for " + fieldName + ": expected " + digit + " but got " + checkDigit);
+			System.out.println("Check digit verification failed for " + fieldName + ": expected " + digit + " but got " + checkDigit);
 		}
 		return invalidCheckdigit == null;
 	}
@@ -246,10 +241,10 @@ public class MrzParser {
 			year = Integer.parseInt(rawValue(r));
 		} catch (NumberFormatException ex) {
 			year = -1;
-			LOG.debug("Failed to parse MRZ date year " + rawValue(range) + ": " + ex, getMrz(), r);
+			System.out.println("Failed to parse MRZ date year " + rawValue(range) + ": " + ex);
 		}
 		if (year < 0 || year > 99) {
-			LOG.debug("Invalid year value " + year + ": must be 0..99");
+			System.out.println("Invalid year value " + year + ": must be 0..99");
 		}
 		return year;
 	}
@@ -261,10 +256,10 @@ public class MrzParser {
 			month = Integer.parseInt(rawValue(r));
 		} catch (NumberFormatException ex) {
 			month = -1;
-			LOG.debug("Failed to parse MRZ date month " + rawValue(range) + ": " + ex, getMrz(), r);
+			System.out.println("Failed to parse MRZ date month " + rawValue(range) + ": " + ex);
 		}
 		if (month < 1 || month > 12) {
-			LOG.debug("Invalid month value " + month + ": must be 1..12");
+			System.out.println("Invalid month value " + month + ": must be 1..12");
 		}
 		return month;
 	}
@@ -276,10 +271,10 @@ public class MrzParser {
 			day = Integer.parseInt(rawValue(r));
 		} catch (NumberFormatException ex) {
 			day = -1;
-			LOG.debug("Failed to parse MRZ date day " + rawValue(range) + ": " + ex, getMrz(), r);
+			System.out.println("Failed to parse MRZ date day " + rawValue(range) + ": " + ex);
 		}
 		if (day < 1 || day > 31) {
-			LOG.debug("Invalid day value " + day + ": must be 1..31");
+			System.out.println("Invalid day value " + day + ": must be 1..31");
 		}
 		return day;
 	}
