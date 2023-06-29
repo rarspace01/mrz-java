@@ -17,5 +17,19 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Build Test and Verify
-      run: ./gradlew clean build -Pdisplay-versions
+    - name: Build and run tests for all applications
+      run: ./gradlew publish
+    - name: Bump version and push tag
+      id: tag-version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        release_branches: main
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag-version.outputs.new_tag }}
+        files: |
+          ./build/libs/mrz-java.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.AUTOPR }}
