@@ -82,6 +82,7 @@ enum class MrzDocumentCode {
                 "AC" -> return CREW_MEMBER
                 "ME" -> return MIGRANT
                 "TD" -> return MIGRANT // travel document
+                "PT" -> return MIGRANT
                 "IP" -> return PASSPORT
                 else -> {}
             }

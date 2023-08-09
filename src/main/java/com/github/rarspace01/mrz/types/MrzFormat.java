@@ -21,13 +21,7 @@ package com.github.rarspace01.mrz.types;
 import com.github.rarspace01.mrz.MrzParseException;
 import com.github.rarspace01.mrz.MrzRange;
 import com.github.rarspace01.mrz.MrzRecord;
-import com.github.rarspace01.mrz.records.FrenchIdCard;
-import com.github.rarspace01.mrz.records.MRP;
-import com.github.rarspace01.mrz.records.MrtdTd1;
-import com.github.rarspace01.mrz.records.MrtdTd2;
-import com.github.rarspace01.mrz.records.MrvA;
-import com.github.rarspace01.mrz.records.MrvB;
-import com.github.rarspace01.mrz.records.SlovakId2x34;
+import com.github.rarspace01.mrz.records.*;
 
 /**
  * Lists all supported MRZ formats. Note that the order of the enum constants are important, see for example {@link  #FRENCH_ID}.
@@ -73,6 +67,19 @@ public enum MrzFormat {
 	 */
 	MRTD_TD2(2, 36, MrtdTd2.class),
 	/**
+	 * German Travel Pass format: Two row, 44 characters per line format.
+	 */
+	TRAVEL_PASS(2, 44, PTD.class){
+
+		@Override
+		public boolean isFormatOf(final String[] mrzRows) {
+			if (!super.isFormatOf(mrzRows)) {
+				return false;
+			}
+			return mrzRows[0].startsWith("PTD") && !mrzRows[1].substring(0, 10).contains("<");
+		}
+	},
+	/**
 	 * MRV type-A format: A two lines long, 44 characters per line format Need to occur before {@link #PASSPORT} constant because of the same values
 	 * for row/column. See below for the "if" test.
 	 */
@@ -94,6 +101,7 @@ public enum MrzFormat {
 	 * Unknown 2 line/34 characters per line format, used with old Slovak ID cards.
 	 */
 	SLOVAK_ID_234(2, 34, SlovakId2x34.class);
+
 
 	private final int rows;
 	private final int columns;
