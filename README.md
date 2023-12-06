@@ -4,7 +4,7 @@ Machine-Readable Zone (MRZ, see http://en.wikipedia.org/wiki/Machine-readable_pa
 
 ## Status
 
-[![Build Status](https://github.com/rarspace01/mrz-java/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/BorderTech/mrz-java/actions/workflows/github-actions-build.yml)
+[![Build Status](https://github.com/rarspace01/mrz-java/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/rarspace01/mrz-java/actions/workflows/github-actions-build.yml)
 
 ## Getting started
 
